@@ -1,0 +1,40 @@
+<?php
+
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\pemesananController;
+use App\Http\Controllers\registerController;
+use App\Http\Controllers\rombonganController;
+use App\Http\Controllers\venueController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/signup', [registerController::class, 'create']);
+
+Route::post('/register', [registerController::class, 'store'])->name('register');
+
+
+Route::get('/signin', [loginController::class, 'index']);
+
+Route::post('/check', [loginController::class, 'check'])->name('check');
+
+Route::get('/logout', [loginController::class, 'logout']);
+
+Route::get('/dashboard', [dashboardController::class])->name('dashboard');
+
+
+
+
+Route::resource('rombongan', rombonganController::class);
+Route::resource('venue', venueController::class);
+Route::resource('pemesanan', pemesananController::class);
