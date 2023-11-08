@@ -12,7 +12,7 @@
             color: #E5ECFF;
         }
     </style>
-    <title>Document</title>
+    <title>Ancol</title>
 </head>
 <body style="background-color: #3A467E;">
     <div class="d-flex">

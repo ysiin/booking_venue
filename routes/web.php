@@ -30,11 +30,10 @@ Route::post('/check', [loginController::class, 'check'])->name('check');
 
 Route::get('/logout', [loginController::class, 'logout']);
 
-Route::get('/dashboard', [dashboardController::class])->name('dashboard');
+Route::get('/datacalendar', [dashboardController::class, 'listEvent'])->name('home');
 
 
-
-
+Route::resource('/', dashboardController::class);
 Route::resource('rombongan', rombonganController::class);
 Route::resource('venue', venueController::class);
 Route::resource('pemesanan', pemesananController::class);

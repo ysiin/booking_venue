@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+
     <title>Ancol</title>
     <style>
+        .fc-col-header-cell-cushion{
+            color: white !important;
+        }
+        
         td {
-            background-color: #D0DBFF !important;
+            background-color: white !important;
         }
     </style>
 </head>
@@ -29,7 +34,7 @@
                 aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" style="" href="{{ url('rombongan') }}">
+            <a class="navbar-brand" style="" href="{{ url('/') }}">
                 <img src="{{ url('assets/logo_ancol_putih.png') }}" alt="" width="222px" height="72px">
             </a>
 
@@ -103,6 +108,8 @@
         @include('sweetalert::alert')
         @yield('content')
     </main>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>

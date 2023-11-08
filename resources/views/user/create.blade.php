@@ -12,7 +12,7 @@
             color: #E5ECFF;
         }
     </style>
-    <title>Document</title>
+    <title>Ancol</title>
 </head>
 
 <body style="background-color: #3A467E;">
@@ -55,10 +55,10 @@
                                     <input class="form-control" type="password" id="password" name="password" required>
                                     <button type="submit" class="btn btn-block mt-2 btn-sm"
                                         style="background-color: #E5ECFF;color: #3A467E;border-radius: 10px;font-size: 105x;font-style: normal;font-weight: 600;">Sign
-                                        In</button>
+                                        Up</button>
                                     <div class="d-flex justify-content-center mt-2" style="font-size: 12px">
                                         <p class="mr-1" style="color: white">already have an account? </p>
-                                        <a href="{{ url('signin') }}" style="color: black"> Sign up</a>
+                                        <a href="{{ url('signin') }}" style="color: black"> Sign in</a>
                                     </div>
                                 </form>
                             </div>
