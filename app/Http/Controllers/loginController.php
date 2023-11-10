@@ -35,7 +35,11 @@ class loginController extends Controller
         ];
 
         if (Auth::attempt($infologin)){
-            return redirect('/')->with('toast_success', 'Berhasil Login');
+            if(Auth::user()->role == 'admin'){
+                return redirect('/')->with('toast_success', 'Berhasil Login');
+            } else {
+                return redirect('/')->with('toast_success', 'Berhasil Login');
+            }
         }else {
             return redirect('signin')->with('toast_error', 'Username atau Password salah');
         }

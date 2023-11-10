@@ -5,6 +5,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\pemesananController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\rombonganController;
+use App\Http\Controllers\userController;
 use App\Http\Controllers\venueController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +24,17 @@ Route::get('/signup', [registerController::class, 'create']);
 
 Route::post('/register', [registerController::class, 'store'])->name('register');
 
-
 Route::get('/signin', [loginController::class, 'index']);
 
 Route::post('/check', [loginController::class, 'check'])->name('check');
 
 Route::get('/logout', [loginController::class, 'logout']);
+
+
+Route::middleware(['admin'])->group(function () {
+    Route::resource('user', userController::class);
+});
+
 
 Route::get('/datacalendar', [dashboardController::class, 'listEvent'])->name('home');
 

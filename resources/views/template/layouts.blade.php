@@ -11,10 +11,10 @@
 
     <title>Ancol</title>
     <style>
-        .fc-col-header-cell-cushion{
+        .fc-col-header-cell-cushion {
             color: white !important;
         }
-        
+
         td {
             background-color: white !important;
         }
@@ -48,56 +48,133 @@
 
 
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item justify-content-start">
-                            <a class="nav-link ml-2" style="" href="#">
-                                <img src="{{ url('assets/vector_profile.png') }}" alt="" width="44px"
-                                    height="44px">
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ url('rombongan') }}"
-                                id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Rombongan
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: #BECEFF"
-                                aria-labelledby="offcanvasNavbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url('rombongan') }}">Daftar Rombongan</a></li>
-                                <li><a class="dropdown-item" href="{{ url('rombongan/create') }}">Tambah Rombongan</a>
+                    @if (Auth::check())
+
+                        @if (Auth::user()->role === 'admin')
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item justify-content-start">
+                                    <a class="nav-link ml-2" style="" href="#">
+                                        <img src="{{ url('assets/vector_profile.png') }}" alt=""
+                                            width="44px" height="44px">
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('user') }}"
+                                        role="button"
+                                        aria-expanded="false">
+                                        User
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('rombongan') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Rombongan
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('rombongan') }}">Daftar Rombongan</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('rombongan/create') }}">Tambah
+                                                Rombongan</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('venue') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Venue
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('venue') }}">Daftar Venue</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('venue/create') }}">Tambah Venue</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('venue') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Pemesanan
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('pemesanan') }}">Daftar Pemesanan</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ url('pemesanan/create') }}">Tambah
+                                                Pemesanan</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link ml-2" href="/logout" style="color: #3A467E">
+                                        <img src="{{ url('assets/logout.png') }}" alt="" width="44px"
+                                            height="44px">
+                                    </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ url('venue') }}" id="offcanvasNavbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Venue
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: #BECEFF"
-                                aria-labelledby="offcanvasNavbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url('venue') }}">Daftar Venue</a></li>
-                                <li><a class="dropdown-item" href="{{ url('venue/create') }}">Tambah Venue</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ url('venue') }}" id="offcanvasNavbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pemesanan
-                            </a>
-                            <ul class="dropdown-menu" style="background-color: #BECEFF"
-                                aria-labelledby="offcanvasNavbarDropdown">
-                                <li><a class="dropdown-item" href="{{ url('pemesanan') }}">Daftar Pemesanan</a></li>
-                                <li><a class="dropdown-item" href="{{ url('pemesanan/create') }}">Tambah Pemesanan</a>
+                        @else
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item justify-content-start">
+                                    <a class="nav-link ml-2" style="" href="#">
+                                        <img src="{{ url('assets/vector_profile.png') }}" alt=""
+                                            width="44px" height="44px">
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('rombongan') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Rombongan
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('rombongan') }}">Daftar
+                                                Rombongan</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('rombongan/create') }}">Tambah
+                                                Rombongan</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('venue') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Venue
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('venue') }}">Daftar Venue</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('venue/create') }}">Tambah
+                                                Venue</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ url('venue') }}"
+                                        id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        Pemesanan
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #BECEFF"
+                                        aria-labelledby="offcanvasNavbarDropdown">
+                                        <li><a class="dropdown-item" href="{{ url('pemesanan') }}">Daftar
+                                                Pemesanan</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('pemesanan/create') }}">Tambah
+                                                Pemesanan</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link ml-2" href="/logout" style="color: #3A467E">
+                                        <img src="{{ url('assets/logout.png') }}" alt="" width="44px"
+                                            height="44px">
+                                    </a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link ml-2" href="/logout" style="color: #3A467E">
-                                <img src="{{ url('assets/logout.png') }}" alt="" width="44px"
-                                    height="44px">
-                            </a>
-                        </li>
-                    </ul>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
