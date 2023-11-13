@@ -30,6 +30,9 @@ Route::post('/check', [loginController::class, 'check'])->name('check');
 
 Route::get('/logout', [loginController::class, 'logout']);
 
+Route::put('/pemesanan/status/{id}', [pemesananController::class, 'updateStatus']);
+
+Route::get('/pemesanan/pending', [pemesananController::class, 'pending']);
 
 Route::middleware(['admin'])->group(function () {
     Route::resource('user', userController::class);

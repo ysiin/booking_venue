@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal_sewa');
             $table->dateTime('jam_mulai');
             $table->dateTime('jam_selesai');
+            $table->enum('status', ['active', 'pending'])->default('pending');
             $table->timestamps();
         });
     }

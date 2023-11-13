@@ -26,7 +26,7 @@ class dashboardController extends Controller
     {
         $events = [];
 
-        $appointments = pemesanan::with(['venue', 'rombongan'])->get();
+        $appointments = pemesanan::where('status', 'active')->with(['venue', 'rombongan'])->get();
 
         foreach ($appointments as $item) {
             

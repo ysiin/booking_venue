@@ -15,7 +15,6 @@
                                     <th>Tanggal Sewa</th>
                                     <th>Jam Mulai</th>
                                     <th>Jam Selesai</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -46,7 +45,6 @@
                                         <td>{{ $item->tanggal_sewa }}</td>
                                         <td>{{ $item->jam_mulai }}</td>
                                         <td>{{ $item->jam_selesai }}</td>
-                                        <td>{{ $item->status }}</td>
                                         <td>
                                             <form onsubmit="return confirm('Yakin hapus data ini?')" class="d-inline"
                                                 action="{{ url('pemesanan/' . $item->id) }}" method="POST">
@@ -54,6 +52,13 @@
                                                 @method('DELETE')
                                                 <button type="submit" name="submit"
                                                     class="btn btn-danger btn-sm">Del</button>
+                                            </form>
+                                            <form onsubmit="return confirm('Yakin hapus data ini?')" class="d-inline"
+                                                action="{{ url('/pemesanan/status/' . $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" name="status" value="active"
+                                                    class="btn btn-success btn-sm">Acc</button>
                                             </form>
                                         </td>
                                     </tr>

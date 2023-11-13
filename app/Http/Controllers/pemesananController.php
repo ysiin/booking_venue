@@ -7,6 +7,7 @@ use App\Models\rombongan;
 use App\Models\venue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class pemesananController extends Controller
 {
@@ -104,5 +105,28 @@ class pemesananController extends Controller
     {
         pemesanan::where('id', $id)->delete();
         return redirect()->to('pemesanan')->with('toast_success', 'Berhasil dihapus');
+    }
+
+    public function pending()
+    {
+        if (Auth::check() == false) {
+            return redirect('/signin');
+        };
+
+        $data = pemesanan::where('status', 'pending')->orderBy('id', 'desc')->paginate(10);
+        return view('pemesanan.pending')->with('data1', $data);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $data = pemesanan::where('id', $id);
+
+        $request->validate([
+            'status' => ['required', Rule::in(['active'])],
+        ]);
+
+        $data->update(['status' => 'active']);
+
+        return redirect()->to('pemesanan')->with('toast_success', 'Berhasil di acc');
     }
 }
