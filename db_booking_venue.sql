@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2023 at 04:12 AM
+-- Generation Time: Nov 13, 2023 at 03:12 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 8.0.21
 
@@ -96,9 +96,7 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id`, `venue_id`, `rombongan_id`, `tanggal_sewa`, `jam_mulai`, `jam_selesai`, `created_at`, `updated_at`) VALUES
-(3, 1, 4, '2023-11-07', '2023-11-07 09:00:00', '2023-11-08 12:00:00', '2023-11-05 20:00:13', '2023-11-05 20:00:13'),
-(4, 2, 4, '2023-11-07', '2023-11-07 12:00:00', '2023-11-07 14:00:00', '2023-11-05 20:12:42', '2023-11-05 20:12:42'),
-(5, 4, 5, '2023-11-07', '2023-11-07 12:00:00', '2023-11-07 13:00:00', '2023-11-05 20:39:47', '2023-11-05 20:39:47');
+(1, 1, 1, '2023-11-11', '2023-11-11 13:00:00', '2023-11-11 13:00:00', '2023-11-09 21:18:49', '2023-11-09 21:18:49');
 
 -- --------------------------------------------------------
 
@@ -140,8 +138,7 @@ CREATE TABLE `rombongan` (
 --
 
 INSERT INTO `rombongan` (`id`, `nama_rombongan`, `jumlah_rombongan`, `no_rekening`, `bukti_transfer`, `created_at`, `updated_at`) VALUES
-(4, 'Sirkel WK', 421, '65432345', NULL, NULL, NULL),
-(5, 'SMKN2', 100, '7654334567', NULL, NULL, NULL);
+(1, 'SDIT Permata Hati', 50, '65432345', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -155,6 +152,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -164,8 +162,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'yasin', 'a@gmail.com', NULL, '$2y$10$8/ddGcVR6a55uJOyL2/xUuzKwSaGHl81OlBMLKlMGPozuEJYLk/IK', NULL, '2023-11-03 00:36:08', '2023-11-03 00:36:08');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, 'admin', 'a@gmail.com', NULL, '$2y$10$LeAhuX4JxEo8UZyV43FioOyafYMFbDdH32hxPMb7yhbZkrA88naWq', 'admin', NULL, '2023-11-09 21:16:47', '2023-11-09 21:16:47'),
+(4, 'user', 'u@gmail.com', NULL, '$2y$10$boM50xIJTKQQRzIMlsNVseHhHV9APJnEyG/KEUw5qcLY6ndD0npF6', 'user', NULL, '2023-11-09 23:30:43', '2023-11-09 23:30:43');
 
 -- --------------------------------------------------------
 
@@ -189,9 +188,7 @@ CREATE TABLE `venue` (
 --
 
 INSERT INTO `venue` (`id`, `nama`, `unit`, `panjang`, `lebar`, `max_kapasitas`, `created_at`, `updated_at`) VALUES
-(1, 'venue 1', 4, 5, 10, 20, '2023-11-03 00:36:53', '2023-11-03 00:36:53'),
-(2, 'venue 1', 3, 21, 24, 200, '2023-11-05 19:59:28', '2023-11-05 19:59:28'),
-(4, 'venue 1', 2, 10, 10, 100, '2023-11-05 20:38:19', '2023-11-05 20:38:19');
+(1, 'venue 1', 3, 10, 5, 50, '2023-11-09 21:18:25', '2023-11-09 21:18:25');
 
 --
 -- Indexes for dumped tables
@@ -271,7 +268,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -283,19 +280,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `rombongan`
 --
 ALTER TABLE `rombongan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
