@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\pemesanan;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +28,7 @@ class dashboardController extends Controller
     {
         $events = [];
 
-        $appointments = pemesanan::where('status', 'active')->with(['venue', 'rombongan'])->get();
+        $appointments = pemesanan::where('status', 'approved')->with(['venue', 'rombongan'])->get();
 
         foreach ($appointments as $item) {
             
@@ -44,10 +46,14 @@ class dashboardController extends Controller
                 $unit = "Pantai Ancol";
             }
 
+            $start = Carbon::parse($item->tanggal_sewa . ' ' . $item->jam_mulai);
+            $end = Carbon::parse($item->tanggal_sewa . ' ' . $item->jam_selesai);
+
+
             $events[] = [
                 'title' => $item->venue->nama . ' (' . $unit . ') ' . ' ' . $item->rombongan->nama_rombongan,
-                'start' => $item->jam_mulai,
-                'end' => $item->jam_selesai,
+                'start' => $start,
+                'end' => $end,
             ];
         };
 

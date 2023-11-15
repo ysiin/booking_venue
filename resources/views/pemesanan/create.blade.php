@@ -50,9 +50,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Jam Mulai</span>
-                            <input name="jam_mulai" type="datetime-local" aria-label="jam_mulai" class="form-control" required>
+                            <input name="jam_mulai" type="time" aria-label="jam_mulai" class="form-control" required>
                             <span class="input-group-text">Jam Selesai</span>
-                            <input name="jam_selesai" type="datetime-local" aria-label="jam_selesai" class="form-control" required>
+                            <input name="jam_selesai" type="time" aria-label="jam_selesai" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <div class="d-grid gap-2 col-6 mx-auto">

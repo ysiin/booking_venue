@@ -20,7 +20,10 @@ class rombonganController extends Controller
         };
 
         $data = rombongan::orderBy('id', 'desc')->paginate(10);
-        return view('rombongan.index')->with('data1', $data);
+        $title = 'Hapus Data Rombongan!';
+        $text = "Yakin hapus data ini?";
+        confirmDelete($title, $text);
+        return view('rombongan.index', compact('data'))->with('data1', $data);
     }
 
     /**

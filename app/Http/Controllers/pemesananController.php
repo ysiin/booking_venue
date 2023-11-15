@@ -8,6 +8,7 @@ use App\Models\venue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class pemesananController extends Controller
 {
@@ -23,7 +24,11 @@ class pemesananController extends Controller
         };
 
         $data = pemesanan::orderBy('id', 'desc')->paginate(10);
-        return view('pemesanan.index')->with('data1', $data);
+        $title = 'Hapus Data Pemesanan!';
+        $text = "Yakin hapus data ini?";
+        confirmDelete($title, $text);
+
+        return view('pemesanan.index', compact('data'))->with('data1', $data);
     }
 
     /**
@@ -50,13 +55,21 @@ class pemesananController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'venue_id' => 'required',
             'rombongan_id' => 'required',
-            'tanggal_sewa' => 'required',
+            'tanggal_sewa' => [ 'required',
+            Rule::unique('pemesanan')->where(function ($query) use ($request) {
+                return $query->where('venue_id', $request->venue_id)
+                             ->where('tanggal_sewa', $request->tanggal_sewa);
+            })->ignore($request->id),
+        ],
             'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'jam_selesai' => 'required|after:jam_mulai',
         ]);
+
+
         pemesanan::create($data);
         return redirect()->to('pemesanan')->with('toast_success', 'Berhasil ditambahkan');
     }
@@ -107,6 +120,7 @@ class pemesananController extends Controller
         return redirect()->to('pemesanan')->with('toast_success', 'Berhasil dihapus');
     }
 
+
     public function pending()
     {
         if (Auth::check() == false) {
@@ -114,19 +128,27 @@ class pemesananController extends Controller
         };
 
         $data = pemesanan::where('status', 'pending')->orderBy('id', 'desc')->paginate(10);
-        return view('pemesanan.pending')->with('data1', $data);
+        $title = 'Hapus data Pemesanan!';
+        $text = "Yakin hapus data ini?";
+        confirmDelete($title, $text,);
+        return view('pemesanan.pending', compact('data'))->with('data1', $data);
     }
+
 
     public function updateStatus(Request $request, $id)
     {
         $data = pemesanan::where('id', $id);
 
-        $request->validate([
-            'status' => ['required', Rule::in(['active'])],
-        ]);
 
-        $data->update(['status' => 'active']);
+        Alert::warning('Warning Title', 'Warning Message');
+        $data->update(['status' => 'approved']);
 
-        return redirect()->to('pemesanan')->with('toast_success', 'Berhasil di acc');
+        return redirect()->to('pemesanan/pending')->with('toast_success', 'Berhasil diverifikasi');
+    }
+
+    public function destroyPending($id)
+    {
+        pemesanan::where('id', $id)->delete();
+        return redirect()->to('pemesanan/pending')->with('toast_success', 'Berhasil dihapus');
     }
 }

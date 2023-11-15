@@ -20,7 +20,10 @@ class venueController extends Controller
         };
 
         $data = venue::orderBy('id', 'desc')->paginate(5);
-        return view('venue.index')->with('data1', $data);
+        $title = 'Hapus Data Venue!';
+        $text = "Yakin hapus data ini?";
+        confirmDelete($title, $text);
+        return view('venue.index', compact('data'))->with('data1', $data);
     }
 
     /**

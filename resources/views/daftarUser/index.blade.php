@@ -25,13 +25,7 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->role }}</td>
                                         <td>
-                                            <form onsubmit="return confirm('Yakin hapus data ini?')" class="d-inline"
-                                                action="{{ url('user/' . $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" name="submit"
-                                                    class="btn btn-danger btn-sm">Del</button>
-                                            </form>
+                                            <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-danger btn-sm" data-confirm-delete="true">Del</a>
                                         </td>
                                     </tr>
                                 @endforeach

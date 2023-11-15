@@ -18,10 +18,11 @@ return new class extends Migration
             $table->foreignId('venue_id')->constrained('venue');
             $table->foreignId('rombongan_id')->constrained('rombongan');
             $table->date('tanggal_sewa');
-            $table->dateTime('jam_mulai');
-            $table->dateTime('jam_selesai');
-            $table->enum('status', ['active', 'pending'])->default('pending');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
+            $table->enum('status', ['approved', 'pending'])->default('pending');
             $table->timestamps();
+            $table->unique(['venue_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai']);
         });
     }
 

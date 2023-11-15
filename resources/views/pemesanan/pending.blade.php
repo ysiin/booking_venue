@@ -46,18 +46,12 @@
                                         <td>{{ $item->jam_mulai }}</td>
                                         <td>{{ $item->jam_selesai }}</td>
                                         <td>
-                                            <form onsubmit="return confirm('Yakin hapus data ini?')" class="d-inline"
-                                                action="{{ url('pemesanan/' . $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" name="submit"
-                                                    class="btn btn-danger btn-sm">Del</button>
-                                            </form>
-                                            <form onsubmit="return confirm('Yakin hapus data ini?')" class="d-inline"
-                                                action="{{ url('/pemesanan/status/' . $item->id) }}" method="POST">
+                                            <a href="{{ url('pemesanan/destroyPending', $item->id) }}"
+                                                class="btn btn-danger btn-sm" data-confirm-delete="true">Del</a>
+                                            <form class="d-inline" action="{{ route('updateStatus' , $item->id) }}" method="POST" id="updateStatus">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" name="status" value="active"
+                                                <button type="button" onclick="confirmUpdate()" name="status" value="approved"
                                                     class="btn btn-success btn-sm">Acc</button>
                                             </form>
                                         </td>
@@ -73,3 +67,23 @@
         </div>
     </div>
 @endsection
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function confirmUpdate() {
+            Swal.fire({
+                title: 'Verifikasi Data Pemesanan!',
+                text: "Yakin verifikasi data pemesanan ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user clicks "OK", submit the form
+                    document.getElementById('updateStatus').submit();
+                }
+            });
+        }
+</script>

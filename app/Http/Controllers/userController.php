@@ -20,7 +20,10 @@ class userController extends Controller
         };
 
         $data = User::orderBy('id', 'desc')->paginate(10);
-        return view('daftarUser.index')->with('data1', $data);
+        $title = 'Hapus Data User!';
+        $text = "Yakin hapus data ini?";
+        confirmDelete($title, $text);
+        return view('daftarUser.index', compact('data'))->with('data1', $data);
     }
 
     /**
