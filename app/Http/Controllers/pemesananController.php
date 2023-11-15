@@ -57,16 +57,17 @@ class pemesananController extends Controller
     {
 
         $data = $request->validate([
-            'venue_id' => 'required',
-            'rombongan_id' => 'required',
-            'tanggal_sewa' => [ 'required',
+            'venue_id' => ['required',
             Rule::unique('pemesanan')->where(function ($query) use ($request) {
                 return $query->where('venue_id', $request->venue_id)
-                             ->where('tanggal_sewa', $request->tanggal_sewa);
+                            ->where('tanggal_sewa', $request->tanggal_sewa);
             })->ignore($request->id),
         ],
+            'rombongan_id' => 'required',
+            'tanggal_sewa' =>  'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required|after:jam_mulai',
+            
         ]);
 
 
