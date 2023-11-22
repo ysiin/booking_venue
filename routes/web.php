@@ -42,7 +42,6 @@ Route::middleware(['admin'])->group(function () {
 
 Route::get('/datacalendar', [dashboardController::class, 'listEvent'])->name('home');
 
-
 Route::resource('/', dashboardController::class);
 Route::resource('rombongan', rombonganController::class);
 Route::resource('venue', venueController::class);

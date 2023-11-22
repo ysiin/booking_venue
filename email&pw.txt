@@ -1,0 +1,11 @@
+Admin 
+Email :a@gmail.com
+pass : 123
+
+User
+Email : u@gmail.com
+pass : 123
+
+Perbedaan Halaman Admin dan User
+1. Admin dapat mengakses halaman pemesanan pending
+2. Admin dapat mengakses halaman daftar user (dengan cara klik nama pada bagian profile)

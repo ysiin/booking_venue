@@ -53,7 +53,7 @@ class rombonganController extends Controller
             'nama_rombongan' => 'required',
             'jumlah_rombongan' => 'required',
             'no_rekening' => 'required',
-            'bukti_transfer' => 'required',
+            'bukti_transfer' => 'required | image',
         ]);
 
         rombongan::create($data);

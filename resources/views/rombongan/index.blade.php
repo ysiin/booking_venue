@@ -1,19 +1,17 @@
-@extends('template.layouts')
+@extends('template.lte')
 
+@section('header')
+    Rombongan
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <main class="col-lg-12 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container">
                     <div class="mt-5">
-                        <form class="d-flex form-inline my-2 my-lg-0">
-                            <input style="border-radius: 20px" class="form-control mr-sm-2" type="search" placeholder="Search"
-                                aria-label="Search">
-                            {{-- <button class="btn btn-sm btn-outline-dark" type="submit">Search</button> --}}
-                        </form>
-                        <table class="table  table-borderless">
+                        <table class="table">
                             <thead>
-                                <tr style="color: #FFFFFF">
+                                <tr>
                                     <th>No. </th>
                                     <th>Nama Rombongan</th>
                                     <th>Jumlah Rombongan</th>

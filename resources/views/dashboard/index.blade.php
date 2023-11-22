@@ -1,4 +1,8 @@
-@extends('template.layouts')
+@extends('template.lte')
+
+@section('header')
+    Dashboard
+@endsection
 
 @section('content')
 <div class="container mt-5">
@@ -26,9 +30,10 @@
       },
       weekNumbers: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      themeSystem: 'bootstrap5',
+      themeSystem: 'bootstrap4',
       events: 'datacalendar',
-      eventColor: '#117ef2'
+      
+      
     });
     calendar.render();
   });

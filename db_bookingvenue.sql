@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 03:21 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 8.0.21
+-- Waktu pembuatan: 22 Nov 2023 pada 09.40
+-- Versi server: 10.4.13-MariaDB
+-- Versi PHP: 8.0.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -50,7 +50,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -77,7 +77,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemesanan`
+-- Struktur dari tabel `pemesanan`
 --
 
 CREATE TABLE `pemesanan` (
@@ -93,16 +93,18 @@ CREATE TABLE `pemesanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `pemesanan`
+-- Dumping data untuk tabel `pemesanan`
 --
 
 INSERT INTO `pemesanan` (`id`, `venue_id`, `rombongan_id`, `tanggal_sewa`, `jam_mulai`, `jam_selesai`, `status`, `created_at`, `updated_at`) VALUES
-(2, 1, 1, '2023-11-30', '12:32:00', '23:24:00', 'approved', '2023-11-14 20:16:00', '2023-11-14 20:16:40');
+(3, 1, 1, '2023-11-15', '08:00:00', '12:00:00', 'approved', '2023-11-14 20:29:23', '2023-11-14 20:29:34'),
+(5, 2, 1, '2023-11-15', '12:22:00', '14:22:00', 'pending', '2023-11-14 20:38:10', '2023-11-14 20:38:10'),
+(9, 2, 1, '2023-11-22', '12:00:00', '13:00:00', 'approved', '2023-11-22 00:46:12', '2023-11-22 00:46:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Struktur dari tabel `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -121,7 +123,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rombongan`
+-- Struktur dari tabel `rombongan`
 --
 
 CREATE TABLE `rombongan` (
@@ -135,16 +137,18 @@ CREATE TABLE `rombongan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `rombongan`
+-- Dumping data untuk tabel `rombongan`
 --
 
 INSERT INTO `rombongan` (`id`, `nama_rombongan`, `jumlah_rombongan`, `no_rekening`, `bukti_transfer`, `created_at`, `updated_at`) VALUES
-(1, 'SMKN2', 20, '65432345', NULL, NULL, NULL);
+(1, 'SMKN2', 20, '65432345', NULL, NULL, NULL),
+(2, 'SDIT Permata Hati', 50, '65432345', NULL, NULL, NULL),
+(5, 'SMKN2', 50, '65432345', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -160,16 +164,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'yasin', 'a@gmail.com', NULL, '$2y$10$7p1PPoU9Gx5llqv3SDLDlOVQPGzvTJPx8CuD1NUE8Em8XIM5grUgy', 'admin', NULL, '2023-11-14 20:13:40', '2023-11-14 20:13:40');
+(1, 'yasin', 'a@gmail.com', NULL, '$2y$10$7p1PPoU9Gx5llqv3SDLDlOVQPGzvTJPx8CuD1NUE8Em8XIM5grUgy', 'admin', NULL, '2023-11-14 20:13:40', '2023-11-14 20:13:40'),
+(4, 'orang biasa', 'u@gmail.com', NULL, '$2y$10$uu/o3172U/ACstpPvhmk3ej2h/nBXRNM3W0XpHA7tiCpqr/wRmsOO', 'user', NULL, '2023-11-22 02:07:31', '2023-11-22 02:07:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `venue`
+-- Struktur dari tabel `venue`
 --
 
 CREATE TABLE `venue` (
@@ -184,37 +189,39 @@ CREATE TABLE `venue` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `venue`
+-- Dumping data untuk tabel `venue`
 --
 
 INSERT INTO `venue` (`id`, `nama`, `unit`, `panjang`, `lebar`, `max_kapasitas`, `created_at`, `updated_at`) VALUES
-(1, 'venue 1', 2, 21, 21, 200, '2023-11-14 20:14:43', '2023-11-14 20:14:43');
+(1, 'venue 1', 2, 21, 21, 200, '2023-11-14 20:14:43', '2023-11-14 20:14:43'),
+(2, 'venue 2', 5, 21, 32, 123, '2023-11-14 20:36:27', '2023-11-14 20:36:27'),
+(4, 'venue 10', 3, 12, 2, 200, '2023-11-22 01:21:32', '2023-11-22 01:21:32');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Indeks untuk tabel `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `pemesanan`
+-- Indeks untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
   ADD PRIMARY KEY (`id`),
@@ -222,7 +229,7 @@ ALTER TABLE `pemesanan`
   ADD KEY `pemesanan_rombongan_id_foreign` (`rombongan_id`);
 
 --
--- Indexes for table `personal_access_tokens`
+-- Indeks untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -230,76 +237,76 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `rombongan`
+-- Indeks untuk tabel `rombongan`
 --
 ALTER TABLE `rombongan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Indexes for table `venue`
+-- Indeks untuk tabel `venue`
 --
 ALTER TABLE `venue`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `pemesanan`
+-- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `rombongan`
+-- AUTO_INCREMENT untuk tabel `rombongan`
 --
 ALTER TABLE `rombongan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `venue`
+-- AUTO_INCREMENT untuk tabel `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `pemesanan`
+-- Ketidakleluasaan untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
   ADD CONSTRAINT `pemesanan_rombongan_id_foreign` FOREIGN KEY (`rombongan_id`) REFERENCES `rombongan` (`id`),

@@ -1,4 +1,8 @@
-@extends('template.layouts')
+@extends('template.lte')
+
+@section('header')
+    User
+@endsection
 
 @section('content')
     <div class="container-fluid">
@@ -6,9 +10,9 @@
             <div class="col-lg-12 ms-sm-auto col-lg-10 px-md-4">
                 <div class="container">
                     <div class="mt-5">
-                        <table class="table  table-borderless">
+                        <table class="table">
                             <thead>
-                                <tr style="color: #FFFFFF">
+                                <tr>
                                     <th>No. </th>
                                     <th>Nama</th>
                                     <th>Email</th>
