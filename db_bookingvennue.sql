@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Nov 2023 pada 09.40
+-- Waktu pembuatan: 27 Nov 2023 pada 09.56
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 8.0.21
 
@@ -40,6 +40,29 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `item`
+--
+
+CREATE TABLE `item` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nama_item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `item`
+--
+
+INSERT INTO `item` (`id`, `nama_item`, `quantity`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 'Meja', 100, 25000, '2023-11-27 02:51:51', '2023-11-27 02:51:51'),
+(2, 'Kursi', 500, 20000, '2023-11-27 02:52:07', '2023-11-27 02:52:07');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `migrations`
 --
 
@@ -60,7 +83,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_10_23_034408_create_rombongans_table', 1),
 (6, '2023_11_01_075115_create_venues_table', 1),
-(7, '2023_11_02_083129_create_pemesanans_table', 1);
+(7, '2023_11_02_083129_create_pemesanans_table', 1),
+(8, '2023_11_24_030110_create_items_table', 1),
+(9, '2023_11_24_041650_create_pemesanan_items_table', 1);
 
 -- --------------------------------------------------------
 
@@ -97,9 +122,31 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id`, `venue_id`, `rombongan_id`, `tanggal_sewa`, `jam_mulai`, `jam_selesai`, `status`, `created_at`, `updated_at`) VALUES
-(3, 1, 1, '2023-11-15', '08:00:00', '12:00:00', 'approved', '2023-11-14 20:29:23', '2023-11-14 20:29:34'),
-(5, 2, 1, '2023-11-15', '12:22:00', '14:22:00', 'pending', '2023-11-14 20:38:10', '2023-11-14 20:38:10'),
-(9, 2, 1, '2023-11-22', '12:00:00', '13:00:00', 'approved', '2023-11-22 00:46:12', '2023-11-22 00:46:31');
+(1, 1, 1, '2023-11-14', '12:00:00', '14:00:00', 'approved', '2023-11-27 02:53:41', '2023-11-27 02:54:03');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pemesanan_item`
+--
+
+CREATE TABLE `pemesanan_item` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `pemesanan_id` bigint(20) UNSIGNED NOT NULL,
+  `item_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` bigint(20) DEFAULT NULL,
+  `harga` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `pemesanan_item`
+--
+
+INSERT INTO `pemesanan_item` (`id`, `pemesanan_id`, `item_id`, `quantity`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 10, 20000, NULL, NULL),
+(2, 1, 2, 50, 15000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -141,9 +188,7 @@ CREATE TABLE `rombongan` (
 --
 
 INSERT INTO `rombongan` (`id`, `nama_rombongan`, `jumlah_rombongan`, `no_rekening`, `bukti_transfer`, `created_at`, `updated_at`) VALUES
-(1, 'SMKN2', 20, '65432345', NULL, NULL, NULL),
-(2, 'SDIT Permata Hati', 50, '65432345', NULL, NULL, NULL),
-(5, 'SMKN2', 50, '65432345', NULL, NULL, NULL);
+(1, 'SMKN2', 50, '65432345', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -168,8 +213,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'yasin', 'a@gmail.com', NULL, '$2y$10$7p1PPoU9Gx5llqv3SDLDlOVQPGzvTJPx8CuD1NUE8Em8XIM5grUgy', 'admin', NULL, '2023-11-14 20:13:40', '2023-11-14 20:13:40'),
-(4, 'orang biasa', 'u@gmail.com', NULL, '$2y$10$uu/o3172U/ACstpPvhmk3ej2h/nBXRNM3W0XpHA7tiCpqr/wRmsOO', 'user', NULL, '2023-11-22 02:07:31', '2023-11-22 02:07:31');
+(1, 'admin', 'a@gmail.com', NULL, '$2y$10$AfPjAi.GCNI18KNnlICpFeLNLDtRuTWq4iCkKSsqWuHpeyVNwIQA2', 'admin', NULL, '2023-11-27 02:49:12', '2023-11-27 02:49:12'),
+(2, 'orang biasa', 'u@gmail.com', NULL, '$2y$10$ifLE/2fInrdeSdJPrISk0e./ZgxFS9Iaxo1J.lcKU3lms8zajhd9i', 'user', NULL, '2023-11-27 02:49:30', '2023-11-27 02:49:30');
 
 -- --------------------------------------------------------
 
@@ -184,6 +229,7 @@ CREATE TABLE `venue` (
   `panjang` tinyint(4) NOT NULL,
   `lebar` tinyint(4) NOT NULL,
   `max_kapasitas` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -192,10 +238,8 @@ CREATE TABLE `venue` (
 -- Dumping data untuk tabel `venue`
 --
 
-INSERT INTO `venue` (`id`, `nama`, `unit`, `panjang`, `lebar`, `max_kapasitas`, `created_at`, `updated_at`) VALUES
-(1, 'venue 1', 2, 21, 21, 200, '2023-11-14 20:14:43', '2023-11-14 20:14:43'),
-(2, 'venue 2', 5, 21, 32, 123, '2023-11-14 20:36:27', '2023-11-14 20:36:27'),
-(4, 'venue 10', 3, 12, 2, 200, '2023-11-22 01:21:32', '2023-11-22 01:21:32');
+INSERT INTO `venue` (`id`, `nama`, `unit`, `panjang`, `lebar`, `max_kapasitas`, `harga`, `created_at`, `updated_at`) VALUES
+(1, 'venue 1', 2, 10, 10, 200, 420000, '2023-11-27 02:52:26', '2023-11-27 02:52:26');
 
 --
 -- Indexes for dumped tables
@@ -207,6 +251,12 @@ INSERT INTO `venue` (`id`, `nama`, `unit`, `panjang`, `lebar`, `max_kapasitas`, 
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indeks untuk tabel `item`
+--
+ALTER TABLE `item`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `migrations`
@@ -227,6 +277,14 @@ ALTER TABLE `pemesanan`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `pemesanan_venue_id_tanggal_sewa_jam_mulai_jam_selesai_unique` (`venue_id`,`tanggal_sewa`,`jam_mulai`,`jam_selesai`),
   ADD KEY `pemesanan_rombongan_id_foreign` (`rombongan_id`);
+
+--
+-- Indeks untuk tabel `pemesanan_item`
+--
+ALTER TABLE `pemesanan_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pemesanan_item_pemesanan_id_foreign` (`pemesanan_id`),
+  ADD KEY `pemesanan_item_item_id_foreign` (`item_id`);
 
 --
 -- Indeks untuk tabel `personal_access_tokens`
@@ -266,16 +324,28 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT untuk tabel `item`
+--
+ALTER TABLE `item`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `pemesanan_item`
+--
+ALTER TABLE `pemesanan_item`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -287,19 +357,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `rombongan`
 --
 ALTER TABLE `rombongan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -311,6 +381,13 @@ ALTER TABLE `venue`
 ALTER TABLE `pemesanan`
   ADD CONSTRAINT `pemesanan_rombongan_id_foreign` FOREIGN KEY (`rombongan_id`) REFERENCES `rombongan` (`id`),
   ADD CONSTRAINT `pemesanan_venue_id_foreign` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `pemesanan_item`
+--
+ALTER TABLE `pemesanan_item`
+  ADD CONSTRAINT `pemesanan_item_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pemesanan_item_pemesanan_id_foreign` FOREIGN KEY (`pemesanan_id`) REFERENCES `pemesanan` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
