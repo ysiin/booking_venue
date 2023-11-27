@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\venue;
+use App\Models\item;
 use Illuminate\Http\Request;
-use Laraindo\RupiahFormat;
 use Illuminate\Support\Facades\Auth;
 
-class venueController extends Controller
+class itemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +19,12 @@ class venueController extends Controller
             return redirect('/signin');
         };
 
-        $data = venue::orderBy('id', 'desc')->paginate(5);        
+        $data = item::orderBy('id', 'desc')->paginate(5);
         
-        $title = 'Hapus Data Venue!';
+        $title = 'Hapus Data Item!';
         $text = "Yakin hapus data ini?";
         confirmDelete($title, $text);
-        return view('venue.index', compact('data'))->with('data1', $data);
+        return view('item.index', compact('data'))->with('data1', $data);
     }
 
     /**
@@ -39,7 +38,7 @@ class venueController extends Controller
             return redirect('/signin');
         };
 
-        return view('venue.create');
+        return view('item.create');
     }
 
     /**
@@ -51,17 +50,13 @@ class venueController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required',
-            'unit' => 'required',
-            'panjang' => 'required',
-            'lebar' => 'required',
-            'max_kapasitas' => 'required',
+            'nama_item' => 'required',
+            'quantity' => 'required',
             'harga' => 'required',
-
         ]);
 
-        venue::create($data);
-        return redirect()->to('venue')->with('toast_success', 'Berhasil ditambahkan');
+        item::create($data);
+        return redirect()->to('item')->with('toast_success', 'Berhasil ditambahkan');
     }
 
     /**
@@ -106,7 +101,7 @@ class venueController extends Controller
      */
     public function destroy($id)
     {
-        venue::where('id', $id)->delete();
-        return redirect()->to('venue')->with('toast_success', 'Berhasil dihapus');
+        item::where('id', $id)->delete();
+        return redirect()->to('item')->with('toast_success', 'Berhasil dihapus');
     }
 }

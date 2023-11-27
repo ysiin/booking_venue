@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/daterangepicker/daterangepicker.css') }} ">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('lte/plugins/summernote/summernote-bs4.min.css') }} ">
+    <!-- Jquery Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -166,6 +168,30 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <!-- List Item  -->
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-tree"></i>
+                                            <p>
+                                                Item
+                                                <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="{{ url('item') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Daftar Item</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ url('item/create') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Tambah Item</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li class="nav-item">
                                         <a href="/logout" class="nav-link">
                                             <p>
@@ -265,6 +291,30 @@
                                                 <a href="{{ url('venue/create') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Tambah Venue</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- List Item  -->
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-tree"></i>
+                                            <p>
+                                                Item
+                                                <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="{{ url('item') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Daftar Item</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ url('item/create') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Tambah Item</p>
                                                 </a>
                                             </li>
                                         </ul>

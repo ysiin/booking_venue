@@ -20,6 +20,7 @@
                                     <th>Jam Mulai</th>
                                     <th>Jam Selesai</th>
                                     <th>Status</th>
+                                    <th>Item</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,7 +53,13 @@
                                         <td>{{ $item->jam_selesai }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
-                                            <a href="{{ route('pemesanan.destroy', $item->id) }}" class="btn btn-danger btn-sm" data-confirm-delete="true">Del</a>
+                                                @foreach ($item->item as $item)
+                                                    <li>{{ $item->nama_item }} {{ $item->pivot->quantity }} Rp. {{ number_format($item->pivot->harga) }}</li>
+                                                @endforeach
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('pemesanan.destroy', $item->id) }}"
+                                                class="btn btn-danger btn-sm" data-confirm-delete="true">Del</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

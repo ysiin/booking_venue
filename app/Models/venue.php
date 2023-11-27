@@ -9,5 +9,5 @@ class venue extends Model
 {
     use HasFactory;
     protected $table = 'venue';
-    protected $fillable = ['nama', 'unit', 'panjang', 'lebar', 'max_kapasitas'];
+    protected $fillable = ['nama', 'unit', 'panjang', 'lebar', 'max_kapasitas', 'harga'];
 }

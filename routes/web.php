@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\itemController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\pemesananController;
 use App\Http\Controllers\registerController;
@@ -42,7 +43,9 @@ Route::middleware(['admin'])->group(function () {
 
 Route::get('/datacalendar', [dashboardController::class, 'listEvent'])->name('home');
 
+
 Route::resource('/', dashboardController::class);
 Route::resource('rombongan', rombonganController::class);
 Route::resource('venue', venueController::class);
 Route::resource('pemesanan', pemesananController::class);
+Route::resource('item', itemController::class);

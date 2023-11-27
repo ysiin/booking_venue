@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\item;
 use App\Models\pemesanan;
 use App\Models\rombongan;
 use App\Models\venue;
@@ -23,7 +24,10 @@ class pemesananController extends Controller
             return redirect('/signin');
         };
 
-        $data = pemesanan::orderBy('id', 'desc')->paginate(10);
+        $data = pemesanan::with('item')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
         $title = 'Hapus Data Pemesanan!';
         $text = "Yakin hapus data ini?";
         confirmDelete($title, $text);
@@ -44,7 +48,8 @@ class pemesananController extends Controller
 
         $venue = venue::all();
         $rombongan = rombongan::all();
-        return view('pemesanan.create', compact('venue', 'rombongan'));
+        $barang = item::all();
+        return view('pemesanan.create', compact('venue', 'rombongan', 'barang'));
     }
 
     /**
@@ -57,21 +62,35 @@ class pemesananController extends Controller
     {
 
         $data = $request->validate([
-            'venue_id' => ['required',
-            Rule::unique('pemesanan')->where(function ($query) use ($request) {
-                return $query->where('venue_id', $request->venue_id)
-                            ->where('tanggal_sewa', $request->tanggal_sewa);
-            })->ignore($request->id),
-        ],
-            'rombongan_id' => 'required',
-            'tanggal_sewa' =>  'required',
+            'venue_id' => [
+                'required',
+                Rule::unique('pemesanan')->where(function ($query) use ($request) {
+                    return $query->where('venue_id', $request->venue_id)
+                        ->where('tanggal_sewa', $request->tanggal_sewa);
+                })->ignore($request->id),
+            ],
+            'rombongan_id' => 'required | string',
+            'tanggal_sewa' =>  'required | string',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required|after:jam_mulai',
-            
+            'item_ids' => 'array',
+            'quantity' => 'array',
+            'harga' => 'array',
         ]);
 
 
-        pemesanan::create($data);
+        $pemesanan = Pemesanan::create($data);
+
+        $itemDetails = [];
+        foreach ($request->input('item_ids', []) as $key => $itemId) {
+            $itemDetails[$itemId] = [
+                'quantity' => $request->input('quantity.' . $key),
+                'harga' => $request->input('harga.' . $key),
+            ];
+        }
+        $pemesanan->item()->attach($itemDetails);
+
+
         return redirect()->to('pemesanan')->with('toast_success', 'Berhasil ditambahkan');
     }
 
@@ -117,6 +136,7 @@ class pemesananController extends Controller
      */
     public function destroy($id)
     {
+        
         pemesanan::where('id', $id)->delete();
         return redirect()->to('pemesanan')->with('toast_success', 'Berhasil dihapus');
     }

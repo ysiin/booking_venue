@@ -20,5 +20,11 @@ class pemesanan extends Model
     {
         return $this->belongsTo(rombongan::class);
     }
+    
+
+    public function item()
+    {
+        return $this->belongsToMany(item::class, 'pemesanan_item')->withPivot('quantity', 'harga');
+    }
 
 }

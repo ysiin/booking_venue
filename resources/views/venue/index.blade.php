@@ -18,6 +18,7 @@
                                     <th>Unit</th>
                                     <th>Ukuran (m)</th>
                                     <th>Kapasitas Maksimal (orang)</th>
+                                    <th>Harga</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -48,6 +49,7 @@
                                             {{ $item->panjang }} x {{ $item->lebar }}
                                         </td>
                                         <td>{{ $item->max_kapasitas }}</td>
+                                        <td> Rp. {{ number_format($item->harga) }}</td>
                                         <td>
                                             <a href="{{ route('venue.destroy', $item->id) }}" class="btn btn-danger btn-sm"
                                                 data-confirm-delete="true">Del</a>

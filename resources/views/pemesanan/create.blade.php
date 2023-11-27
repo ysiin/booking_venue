@@ -60,14 +60,65 @@
                             <span class="input-group-text">Jam Selesai</span>
                             <input name="jam_selesai" type="time" aria-label="jam_selesai" class="form-control" required>
                         </div>
-                        <div class="mb-3">
-                            <div class="d-grid gap-2 col-6 mx-auto">
-                                <button type="submit" class="btn btn-sm btn-primary btn-lg btn-block">Submit</button>
-                            </div>
+                        <button type="button" class="btn btn-sm btn-success add-item">+</button>
+
+
+                        <div class="newItem">
+
                         </div>
-                    </form>
                 </div>
+                <div class="mb-3">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-sm btn-primary btn-lg btn-block">Submit</button>
+                    </div>
+                </div>
+                </form>
             </main>
         </div>
     </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.newItem');
+        const addButton = document.querySelector('.add-item');
+
+        addButton.addEventListener('click', function() {
+            const newInput = document.createElement('div');
+            newInput.innerHTML = `
+                        <div class="d-flex">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="item_id">Nama Item</label>
+                                    <select name="item_ids[]" class="form-control select2" style="width: 100%;" required>
+                                        <option value="" selected></option>
+                                        @foreach ($barang as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_item }} (Rp. {{ number_format($item->harga) }})</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="mb-3">
+                                    <label for="pemesanan_item_quantity">Quantity</label>
+                                    <input type="number" min="1" class="form-control" id="pemesanan_item_quantity"
+                                        name="quantity[]" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label for="pemesanan_item_quantity">Harga (/Item)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp</span>
+                                        </div>
+                                        <input type="number" min="1" class="form-control" id="pemesanan_item_harga" name="harga[]" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            `;
+            container.appendChild(newInput);
+        });
+    });
+</script>

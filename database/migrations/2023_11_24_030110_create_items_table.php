@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('venue', function (Blueprint $table) {
+        Schema::create('item', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 50);
-            $table->tinyInteger('unit');
-            $table->tinyInteger('panjang');
-            $table->tinyInteger('lebar');
-            $table->integer('max_kapasitas');
+            $table->string('nama_item');
+            $table->integer('quantity');
             $table->integer('harga');
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('venue');
+        Schema::dropIfExists('item');
     }
 };
