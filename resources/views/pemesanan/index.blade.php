@@ -53,9 +53,8 @@
                                         <td>{{ $item->jam_selesai }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>
-                                                @foreach ($item->item as $item)
-                                                    <li>{{ $item->nama_item }} {{ $item->pivot->quantity }} Rp. {{ number_format($item->pivot->harga) }}</li>
-                                                @endforeach
+                                            <button type="button" onclick="itemDetails()"
+                                                class="btn-detail btn btn-success btn-sm" data-pemesanan-id="{{ $item->id }}">Item</button>
                                         </td>
                                         <td>
                                             <a href="{{ route('pemesanan.destroy', $item->id) }}"
@@ -73,3 +72,36 @@
         </div>
     </div>
 @endsection
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+            var detailButtons = document.querySelectorAll('.btn-detail');
+            detailButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var pemesananId = this.getAttribute('data-pemesanan-id');
+                    var itemDetails = '';
+                    var quantities = '';
+
+                    // Mengambil nama item dan quantities dari data pemesanan
+                    @foreach ($data1 as $dataPemesanan)
+                        if ("{{ $dataPemesanan->id }}" == pemesananId) {
+                            @foreach ($dataPemesanan->item as $item)
+                                itemDetails += '<li>' + "{{ $item->nama_item }}" + " "  + "{{ $item->pivot->quantity }}" + " "
+                                    + "Rp. " + "{{ number_format($item->pivot->harga) }}" + '</li>';
+                            @endforeach
+                        }
+                    @endforeach
+
+                    // Tampilkan SweetAlert dengan informasi detail pemesanan
+                    Swal.fire({
+                        title: 'Detail Item',
+                        html: itemDetails ,
+                        showCloseButton: true,
+                    });
+                });
+            });
+        });
+</script>
