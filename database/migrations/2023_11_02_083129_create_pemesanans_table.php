@@ -20,9 +20,9 @@ return new class extends Migration
             $table->date('tanggal_sewa');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
-            $table->enum('status', ['approved', 'pending'])->default('pending');
+            $table->enum('status', ['approved', 'pending', 'back'])->default('pending');
             $table->timestamps();
-            $table->unique(['venue_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai']);
+            $table->unique(['venue_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai', 'status'], 'unique_approved_pemesanan');
         });
     }
 

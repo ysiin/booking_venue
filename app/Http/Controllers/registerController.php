@@ -30,6 +30,12 @@ class registerController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
+        ],[
+            'name.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'email.unique' => 'Email ini sudah digunakan',
+            'password.required' => 'Password harus diisi',
+
         ]);
 
         $data = [

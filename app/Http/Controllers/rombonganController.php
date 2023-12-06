@@ -51,9 +51,17 @@ class rombonganController extends Controller
 
         $data = $request->validate([
             'nama_rombongan' => 'required',
-            'jumlah_rombongan' => 'required',
-            'no_rekening' => 'required',
+            'jumlah_rombongan' => 'required|numeric',
+            'no_rekening' => 'required|numeric',
             'bukti_transfer' => 'required | image',
+        ],[
+            'nama_rombongan.required' => 'Nama rombongan harus diisi',
+            'jumlah_rombongan.required' => 'Jumlah rombongan harus diisi',
+            'jumlah_rombongan.numeric' => 'Jumlah rombongan harus berisikan angka',
+            'no_rekening.required' => 'Nomor rekening harus diisi',
+            'no_rekening.numeric' => 'Nomor rekening harus berisikan angka',
+            'bukti_transfer.required' => 'Bukti transfer harus diisi',
+            'bukti_transfer.numeric' => 'Bukti transfer harus berisikan gambar',
         ]);
 
         rombongan::create($data);

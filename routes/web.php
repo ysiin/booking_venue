@@ -36,6 +36,7 @@ Route::get('/logout', [loginController::class, 'logout']);
 Route::middleware(['admin'])->group(function () {
     Route::resource('user', userController::class);
     Route::put('/pemesanan/status/{id}', [pemesananController::class, 'updateStatus'])->name('updateStatus');
+    Route::put('/pemesanan/statusBack/{id}', [pemesananController::class, 'updateStatusBack'])->name('updateStatusBack');
     Route::get('/pemesanan/pending', [pemesananController::class, 'pending']);
     Route::delete('/pemesanan/destroyPending/{id}', [pemesananController::class, 'destroyPending']);
 });

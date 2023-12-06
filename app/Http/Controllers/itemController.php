@@ -52,7 +52,12 @@ class itemController extends Controller
         $data = $request->validate([
             'nama_item' => 'required',
             'quantity' => 'required',
-            'harga' => 'required',
+            'harga' => 'required|numeric',
+        ],[
+            'nama_item.required' => 'Nama item harus diisi',
+            'quantity.required' => 'Quantity harus diisi',
+            'harga.required' => 'Harga harus diisi',
+            'harga.numeric' => 'Harga harus berisikan angka',
         ]);
 
         item::create($data);

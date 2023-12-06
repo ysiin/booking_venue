@@ -50,6 +50,11 @@
                                         <td>{{ $item->jam_mulai }}</td>
                                         <td>{{ $item->jam_selesai }}</td>
                                         <td>
+                                            <form class="d-inline" action="{{ route('updateStatusBack' , $item->id) }}" method="POST" id="updateStatusBack">
+                                                @csrf
+                                                @method('PUT')
+                                            <button type="button" onclick="confirmBack()" class="btn btn-warning btn-sm" name="statusBack" value="back">Back</button>
+                                        </form>
                                             <a href="{{ url('pemesanan/destroyPending', $item->id) }}"
                                                 class="btn btn-danger btn-sm" data-confirm-delete="true">Del</a>
                                             <form class="d-inline" action="{{ route('updateStatus' , $item->id) }}" method="POST" id="updateStatus">
@@ -87,6 +92,22 @@
                 if (result.isConfirmed) {
                     // If the user clicks "OK", submit the form
                     document.getElementById('updateStatus').submit();
+                }
+            });
+        }
+        function confirmBack() {
+            Swal.fire({
+                title: 'Kembalikan Data Pemesanan!',
+                text: "Yakin kembalikan data pemesanan ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user clicks "OK", submit the form
+                    document.getElementById('updateStatusBack').submit();
                 }
             });
         }

@@ -66,7 +66,8 @@ class pemesananController extends Controller
                 'required',
                 Rule::unique('pemesanan')->where(function ($query) use ($request) {
                     return $query->where('venue_id', $request->venue_id)
-                        ->where('tanggal_sewa', $request->tanggal_sewa);
+                        ->where('tanggal_sewa', $request->tanggal_sewa)
+                        ->where('status', 'approved');
                 })->ignore($request->id),
             ],
             'rombongan_id' => 'required | string',
@@ -76,6 +77,13 @@ class pemesananController extends Controller
             'item_ids' => 'array',
             'quantity' => 'array',
             'harga' => 'array',
+        ],[
+            'venue_id.required' => 'Venue harus diisi',
+            'venue_id.unique' => 'Venue ini sudah di isi untuk di tanggal yang sama',
+            'tanggal_sewa.required' => 'Tanggal sewa harus diisi',
+            'jam_mulai.required' => 'Jam mulai harus diisi',
+            'jam_selesai.required' => 'Jam selesai harus diisi',
+            'jam_selesai.after' => 'Jam selesai harus diisi sesudah jam mulai',
         ]);
 
 
@@ -88,6 +96,7 @@ class pemesananController extends Controller
                 'harga' => $request->input('harga.' . $key),
             ];
         }
+
         $pemesanan->item()->attach($itemDetails);
 
 
@@ -113,7 +122,12 @@ class pemesananController extends Controller
      */
     public function edit($id)
     {
-        //
+        $venue = venue::all();
+        $barang = item::all();
+        $data = pemesanan::with('item')
+        ->where('id', $id)
+        ->first();
+        return view('pemesanan.edit', compact('venue', 'barang'))->with('data', $data);
     }
 
     /**
@@ -125,7 +139,43 @@ class pemesananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'venue_id' => [
+                'required',
+                Rule::unique('pemesanan')->where(function ($query) use ($request) {
+                    return $query->where('venue_id', $request->venue_id)
+                        ->where('tanggal_sewa', $request->tanggal_sewa)
+                        ->where('status', 'approved');
+                })->ignore($request->id),
+            ],
+            'tanggal_sewa' =>  'required | string',
+        ],[
+            'venue_id.required' => 'Venue harus diisi',
+            'venue_id.unique' => 'Venue ini sudah di isi untuk di tanggal yang sama',
+            'tanggal_sewa.required' => 'Tanggal sewa harus diisi',
+        ]);
+
+        $data = [
+            'venue_id' => $request->venue_id,
+            'tanggal_sewa' => $request->tanggal_sewa,
+            'status' => 'pending',
+
+        ];
+
+        pemesanan::where('id', $id)->update($data);
+
+        $itemDetails = [];
+        foreach ($request->input('item_ids', []) as $key => $itemId) {
+            $itemDetails[$itemId] = [
+                'quantity' => $request->input('quantity.' . $key),
+                'harga' => $request->input('harga.' . $key),
+            ];
+        }
+    
+        $pemesanan = Pemesanan::find($id);
+        $pemesanan->item()->syncWithoutDetaching($itemDetails);
+
+        return redirect()->to('pemesanan')->with('toast_success', 'Berhasil edit data');
     }
 
     /**
@@ -165,6 +215,17 @@ class pemesananController extends Controller
         $data->update(['status' => 'approved']);
 
         return redirect()->to('pemesanan/pending')->with('toast_success', 'Berhasil diverifikasi');
+    }
+    
+    public function updateStatusBack(Request $request, $id)
+    {
+        $data = pemesanan::where('id', $id);
+
+
+        Alert::warning('Warning Title', 'Warning Message');
+        $data->update(['status' => 'back']);
+
+        return redirect()->to('pemesanan/pending')->with('toast_success', 'Berhasil tes');
     }
 
     public function destroyPending($id)

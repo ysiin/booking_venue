@@ -47,7 +47,7 @@
                                 class="card-body">
                                 <form action="{{ route('register') }}" method="POST">
                                     @csrf
-                                    <label for="">Full Name</label>
+                                    <label for="">username</label>
                                     <input class="form-control" type="text" id="name" name="name" required>
                                     <label for="">Email</label>
                                     <input class="form-control" type="email" id="email" name="email" required>

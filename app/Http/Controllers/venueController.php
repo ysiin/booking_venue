@@ -53,11 +53,21 @@ class venueController extends Controller
         $data = $request->validate([
             'nama' => 'required',
             'unit' => 'required',
-            'panjang' => 'required',
-            'lebar' => 'required',
-            'max_kapasitas' => 'required',
-            'harga' => 'required',
-
+            'panjang' => 'required|numeric',
+            'lebar' => 'required|numeric',
+            'max_kapasitas' => 'required|numeric',
+            'harga' => 'required|numeric',
+        ],[
+            'nama.required' => 'Nama venue harus diisi',
+            'unit.required' => 'Unit harus diisi',
+            'panjang.required' => 'Ukuran panjang venue harus diisi',
+            'panjang.numeric' => 'Ukuran panjang venue harus berisikan angka',
+            'lebar.required' => 'Ukuran lebar venue harus diisi',
+            'lebar.numeric' => 'Ukuran lebar venue harus berisikan angka',
+            'max_kapasitas.required' => 'Kapasitas venue wajib diisi',
+            'max_kapasitas.numeric' => 'Kapasitas venue harus berisikan angka',
+            'harga.required' => 'Harga venue wajib diisi',
+            'harga.numeric' => 'Harga venue harus berisikan angka',
         ]);
 
         venue::create($data);
