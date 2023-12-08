@@ -85,6 +85,47 @@
                         </div>
                         <button type="button" class="btn btn-sm btn-success add-item">+</button>
 
+                        @foreach ($data->item as $items)
+                            <div class="item">
+                                <div class="d-flex">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="item_id">Nama Item</label>
+                                            <select name="item_ids[]" class="form-control select2" style="width: 100%;">
+                                                <option value="0"></option>
+                                                @foreach ($barang as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == $items->id ? 'selected' : '' }}>
+                                                        {{ $item->nama_item }} (Rp. {{ number_format($item->harga) }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="mb-3">
+                                            <label for="pemesanan_item_quantity">Quantity</label>
+                                            <input value="{{ old('quantity', $items->pivot->quantity) }}" type="number"
+                                                min="1" class="form-control" id="pemesanan_item_quantity"
+                                                name="quantity[]">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <label for="pemesanan_item_quantity">Harga (/Item)</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Rp</span>
+                                                </div>
+                                                <input value="{{ old('harga', $items->pivot->harga) }}" type="number"
+                                                    min="1" class="form-control" id="pemesanan_item_harga"
+                                                    name="harga[]">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                         <div class="newItem">
 
                         </div>
@@ -102,9 +143,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        //menambahkan item
         const container = document.querySelector('.newItem');
+        const containers = document.querySelector('.item');
         const addButton = document.querySelector('.add-item');
-
         addButton.addEventListener('click', function() {
             const newInput = document.createElement('div');
             newInput.innerHTML = `
@@ -135,12 +177,19 @@
                                             <span class="input-group-text">Rp</span>
                                         </div>
                                         <input type="number" min="1" class="form-control" id="pemesanan_item_harga" name="harga[]" required>
+                                        <button type="button" class=" ml-2 btn btn-sm btn-danger del-item">-</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
             `;
             container.appendChild(newInput);
+
+            var removeButton = newInput.querySelector('.del-item');
+            removeButton.addEventListener('click', function() {
+                newInput.remove();
+            });
         });
     });
+
 </script>

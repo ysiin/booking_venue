@@ -113,12 +113,18 @@
                                             <span class="input-group-text">Rp</span>
                                         </div>
                                         <input type="number" min="1" class="form-control" id="pemesanan_item_harga" name="harga[]" required>
+                                        <button type="button" class=" ml-2 btn btn-sm btn-danger del-item">-</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
             `;
             container.appendChild(newInput);
+
+            var removeButton = newInput.querySelector('.del-item');
+            removeButton.addEventListener('click', function() {
+                newInput.remove();
+            });
         });
     });
 </script>

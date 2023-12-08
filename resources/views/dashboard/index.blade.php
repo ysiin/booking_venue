@@ -1,11 +1,9 @@
 @extends('template.lte')
 
-@section('header')
-    Dashboard
-@endsection
+
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row">
         <div class="col-lg-12" style="color: white">
             <div id="calendar"></div>
@@ -22,7 +20,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      timeZone: 'local',
+      timeZone: 'Indonesia/Jakarta',
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
