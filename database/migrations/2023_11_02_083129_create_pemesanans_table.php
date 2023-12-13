@@ -21,6 +21,7 @@ return new class extends Migration
             $table->time('jam_mulai');
             $table->time('jam_selesai');
             $table->enum('status', ['approved', 'pending', 'back'])->default('pending');
+            $table->string('bukti_transfer', 300)->nullable();
             $table->timestamps();
             $table->unique(['venue_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai', 'status'], 'unique_approved_pemesanan');
         });

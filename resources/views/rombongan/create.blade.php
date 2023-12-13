@@ -28,19 +28,6 @@
                                     <label for="no_rekening">No. Rekening</label>
                                     <input type="text" class="form-control" id="no_rekening" name="no_rekening" required>
                                 </div>
-                                <div class=" mb-3">
-                                    <div class="form-group">
-                                        <label for="bukti_transfer">Bukti Transfer</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="bukti_transfer"
-                                                    name="bukti_transfer">
-                                                <label class="custom-file-label" for="exampleInputFile"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
                             </div>
                         </div>
                         <div class="mb-3">

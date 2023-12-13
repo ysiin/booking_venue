@@ -9,7 +9,7 @@ class pemesanan extends Model
 {
     use HasFactory;
     protected $table = 'pemesanan';
-    protected $fillable = ['id', 'venue_id', 'rombongan_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai' ];
+    protected $fillable = ['id', 'venue_id', 'rombongan_id', 'tanggal_sewa', 'jam_mulai', 'jam_selesai' ,'bukti_transfer' ];
 
     public function venue()
     {

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nama_rombongan', 100);
             $table->integer('jumlah_rombongan');
             $table->string('no_rekening', 50);
-            $table->string('bukti_transfer', 300)->nullable();
             $table->timestamps();
         });
     }

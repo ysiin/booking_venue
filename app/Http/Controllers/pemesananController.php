@@ -62,7 +62,7 @@ class pemesananController extends Controller
     public function store(Request $request)
     {
 
-        $data = $request->validate([
+        $request->validate([
             'venue_id' => [
                 'required',
                 Rule::unique('pemesanan')->where(function ($query) use ($request) {
@@ -78,6 +78,7 @@ class pemesananController extends Controller
             'item_ids' => 'array',
             'quantity' => 'array',
             'harga' => 'array',
+            'bukti_transfer' => 'required | image',
         ], [
             'venue_id.required' => 'Venue harus diisi',
             'venue_id.unique' => 'Venue ini sudah di isi untuk di tanggal yang sama',
@@ -85,8 +86,22 @@ class pemesananController extends Controller
             'jam_mulai.required' => 'Jam mulai harus diisi',
             'jam_selesai.required' => 'Jam selesai harus diisi',
             'jam_selesai.after' => 'Jam selesai harus diisi sesudah jam mulai',
+            'bukti_transfer.required' => 'Bukti transfer harus diisi',
+            'bukti_transfer.image' => 'Bukti transfer harus berisikan gambar',
         ]);
 
+        $bukti_tf  = $request->file('bukti_transfer');
+        
+        $path = $bukti_tf->store('post-images');
+
+        $data = [
+            'venue_id' => $request->venue_id,
+            'rombongan_id' => $request->rombongan_id,
+            'tanggal_sewa' => $request->tanggal_sewa,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'bukti_transfer' => $path,
+        ];
 
         $pemesanan = Pemesanan::create($data);
 

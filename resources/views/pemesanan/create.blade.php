@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <main class="col-lg-8">
                 <div class="mt-5">
-                    <form action="{{ url('pemesanan') }}" method="POST">
+                    <form action="{{ url('pemesanan') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex">
                             <div class="col-lg-6">
@@ -59,6 +59,19 @@
                             <input name="jam_mulai" type="time" aria-label="jam_mulai" class="form-control" required>
                             <span class="input-group-text">Jam Selesai</span>
                             <input name="jam_selesai" type="time" aria-label="jam_selesai" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="form-group">
+                                <label for="bukti_transfer">Bukti Transfer</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="bukti_transfer"
+                                            name="bukti_transfer">
+                                        <label class="custom-file-label" for="exampleInputFile"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <button type="button" class="btn btn-sm btn-success add-item">+</button>
 
